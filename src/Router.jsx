@@ -7,8 +7,8 @@ import Login from "./pages/Login";
 const Router = () => {
   return (
     <Switch>
-      <Route exact path={"/login"} component={Login} />
-      <Route exact path={"(/)?"} component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="(/)?" component={Home} />
     </Switch>
   );
 };
