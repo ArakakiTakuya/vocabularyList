@@ -1,12 +1,10 @@
 import React from "react";
 
-import Navbar from "../components/Navbar";
 import "../styles/home.css";
 
 const Toppage = () => {
   return (
     <div>
-      <Navbar />
       <div className="toppage">
         <img
           className="topImage"
