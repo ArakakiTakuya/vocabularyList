@@ -61,7 +61,7 @@ const NavbarForLoginUser = ({ username }) => {
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  dispatch(push("/"));
+                  dispatch(push("/create-list"));
                 }}
               >
                 単語帳を作成する
