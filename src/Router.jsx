@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router";
 
 import Toppage from "./pages/Toppage";
-import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Auth from "./Auth";
