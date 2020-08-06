@@ -27,7 +27,6 @@ const SignIn = () => {
 
   return (
     <div>
-      <h2>サインイン</h2>
       <div>
         <TextInput
           fullWidth={true}
@@ -51,23 +50,19 @@ const SignIn = () => {
         />
       </div>
       <div>
-        <Button onClick={() => dispatch(signIn(email, password))}>
-          サインイン
+        <Button
+          style={{
+            background: "#ffca28",
+            color: "#fff",
+            height: 50,
+            marginTop: 10,
+            marginBottom: 20,
+          }}
+          fullWidth={true}
+          onClick={() => dispatch(signIn(email, password))}
+        >
+          ログイン
         </Button>
-        <p
-          onClick={() => {
-            dispatch(push("/signup"));
-          }}
-        >
-          アカウント登録をお持ちでない方はこちら
-        </p>
-        <p
-          onClick={() => {
-            dispatch(push("/signin/reset"));
-          }}
-        >
-          パスワードを忘れた方はこちら
-        </p>
       </div>
     </div>
   );

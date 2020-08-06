@@ -43,7 +43,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <h2>アカウント登録</h2>
       <div>
         <TextInput
           fullWidth={true}
@@ -88,15 +87,20 @@ const SignUp = () => {
       </div>
       <div>
         <Button
+          style={{
+            background: "#ffca28",
+            color: "#fff",
+            height: 50,
+            marginTop: 10,
+            marginBottom: 20,
+          }}
+          fullWidth={true}
           onClick={() =>
             dispatch(signUp(username, email, password, confirmedPassword))
           }
         >
-          アカウントを登録する
+          登録する
         </Button>
-        <p onClick={() => dispatch(push("/signin"))}>
-          アカウントをお持ちの方はこちら
-        </p>
       </div>
     </div>
   );
