@@ -1,19 +1,14 @@
 import React from "react";
-
-import Navbar from "../components/Navbar";
-import "../styles/home.css";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const selector = useSelector((state) => state);
+  const uid = selector.users.uid;
+  const username = selector.users.username;
   return (
     <div>
-      <Navbar />
-      <div className="toppage">
-        <img
-          className="topImage"
-          src="../../images/top-image.png"
-          alt="トップ画像"
-        />
-      </div>
+      <p>{uid}</p>
+      <p>{username}</p>
     </div>
   );
 };

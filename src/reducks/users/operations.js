@@ -2,6 +2,33 @@ import { auth, db, FirebaseTimestamp } from "../../firebase/index";
 import { push } from "connected-react-router";
 import { signInAction } from "./actions";
 
+export const listenAuthState = () => {
+  return async (dispatch) => {
+    return auth.onAuthStateChanged((user) => {
+      if (user) {
+        const uid = user.uid;
+
+        db.collection("users")
+          .doc(uid)
+          .get()
+          .then((snapshot) => {
+            const data = snapshot.data();
+
+            dispatch(
+              signInAction({
+                isSignIn: true,
+                uid: uid,
+                username: data.username,
+              })
+            );
+          });
+      } else {
+        dispatch(push("/signin"));
+      }
+    });
+  };
+};
+
 export const signUp = (username, email, password, confirmedPassword) => {
   return async (dispatch) => {
     // Validations
@@ -78,7 +105,7 @@ export const signIn = (email, password) => {
                 username: data.username,
               })
             );
-            dispatch(push("/"));
+            dispatch(push("/home"));
           });
       }
     });
