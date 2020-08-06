@@ -35,7 +35,14 @@ const Navbar = () => {
           >
             ログイン
           </Button>
-          <Button color="inherit">新規登録</Button>
+          <Button
+            onClick={() => {
+              dispatch(push("/signup"));
+            }}
+            color="inherit"
+          >
+            新規登録
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
