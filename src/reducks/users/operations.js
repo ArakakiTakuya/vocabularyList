@@ -1,6 +1,6 @@
 import { auth, db, FirebaseTimestamp } from "../../firebase/index";
 import { push } from "connected-react-router";
-import { signInAction } from "./actions";
+import { signInAction, signOutAction } from "./actions";
 
 export const listenAuthState = () => {
   return async (dispatch) => {
@@ -23,7 +23,7 @@ export const listenAuthState = () => {
             );
           });
       } else {
-        dispatch(push("/signin"));
+        dispatch(push("/"));
       }
     });
   };
@@ -108,6 +108,15 @@ export const signIn = (email, password) => {
             dispatch(push("/home"));
           });
       }
+    });
+  };
+};
+
+export const signOut = () => {
+  return async (dispatch) => {
+    auth.signOut().then(() => {
+      dispatch(signOutAction());
+      dispatch(push("/"));
     });
   };
 };
