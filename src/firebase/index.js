@@ -1,8 +1,8 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firebase";
-import "firebase/storage";
+import "firebase/firestore";
 import "firebase/functions";
+import "firebase/storage";
 import { firebaseConfig } from "./config";
 
 firebase.initializeApp(firebaseConfig);

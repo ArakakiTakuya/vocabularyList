@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import Button from "@material-ui/core/Button";
 import TextInput from "../components/UIKit/TextInput";
+import { signUp } from "../reducks/users/operations";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -86,7 +87,13 @@ const SignUp = () => {
         />
       </div>
       <div>
-        <Button onClick={() => console.log("hi")}>アカウントを登録する</Button>
+        <Button
+          onClick={() =>
+            dispatch(signUp(username, email, password, confirmedPassword))
+          }
+        >
+          アカウントを登録する
+        </Button>
         <p onClick={() => dispatch(push("/signin"))}>
           アカウントをお持ちの方はこちら
         </p>
