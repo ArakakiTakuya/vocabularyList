@@ -54,6 +54,20 @@ const SignIn = () => {
         <Button onClick={() => dispatch(signIn(email, password))}>
           サインイン
         </Button>
+        <p
+          onClick={() => {
+            dispatch(push("/signup"));
+          }}
+        >
+          アカウント登録をお持ちでない方はこちら
+        </p>
+        <p
+          onClick={() => {
+            dispatch(push("/signin/reset"));
+          }}
+        >
+          パスワードを忘れた方はこちら
+        </p>
       </div>
     </div>
   );

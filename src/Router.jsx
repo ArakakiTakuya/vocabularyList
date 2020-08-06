@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Auth from "./Auth";
 import Home from "./pages/Home";
+import Reset from "./pages/Reset";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Route exact path="(/)?" component={Toppage} />
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/signin/reset" component={Reset} />
       <Auth>
         <Route exact path="/home" component={Home} />
       </Auth>
