@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
 import Button from "@material-ui/core/Button";
 import TextInput from "../components/UIKit/TextInput";
 import { signUp } from "../reducks/users/operations";

@@ -39,7 +39,10 @@ const NavbarForLoginUser = ({ username }) => {
   return (
     <div className={classes.root}>
       <AppBar
-        style={{ color: "#e0f2f1", background: "#ef5350" }}
+        style={{
+          color: "#fff",
+          background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+        }}
         position="static"
       >
         <Toolbar>
