@@ -29,7 +29,7 @@ const Navbar = () => {
           </Typography>
           <Button
             onClick={() => {
-              dispatch(push("/login"));
+              dispatch(push("/signin"));
             }}
             color="inherit"
           >

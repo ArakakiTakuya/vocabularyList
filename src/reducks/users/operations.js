@@ -1,5 +1,6 @@
 import { auth, db, FirebaseTimestamp } from "../../firebase/index";
 import { push } from "connected-react-router";
+import { signInAction } from "./actions";
 
 export const signUp = (username, email, password, confirmedPassword) => {
   return async (dispatch) => {
@@ -47,5 +48,39 @@ export const signUp = (username, email, password, confirmedPassword) => {
         alert("アカウント登録に失敗しました。もう1度お試しください。");
         throw new Error(error);
       });
+  };
+};
+
+export const signIn = (email, password) => {
+  return async (dispatch) => {
+    // Validations
+    if ((email === "", password === "")) {
+      alert("必須項目が未入力です。");
+      return false;
+    }
+
+    auth.signInWithEmailAndPassword(email, password).then((result) => {
+      const user = result.user;
+
+      if (user) {
+        const uid = user.uid;
+
+        db.collection("users")
+          .doc(uid)
+          .get()
+          .then((snapshot) => {
+            const data = snapshot.data();
+
+            dispatch(
+              signInAction({
+                isSignIn: true,
+                uid: uid,
+                username: data.username,
+              })
+            );
+            dispatch(push("/"));
+          });
+      }
+    });
   };
 };
