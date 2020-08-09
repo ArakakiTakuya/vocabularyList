@@ -1,13 +1,17 @@
 import React, { useState, useCallback } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
 import TextInput from "../components/UIKit/TextInput";
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import "../styles/create-list.css";
 import WordCard from "../components/WordCard";
+import { saveList } from "../reducks/lists/operations";
 
 const CreateList = () => {
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const uid = selector.users.uid;
   const [listName, setListName] = useState("");
   const [description, setDescription] = useState("");
   const [wordcards, setWordCard] = useState([
@@ -64,9 +68,7 @@ const CreateList = () => {
       </IconButton>
       <Button
         onClick={() => {
-          console.log("listName", listName);
-          console.log("description", description);
-          console.log("wordcards", wordcards);
+          dispatch(saveList(listName, description, wordcards, uid));
         }}
       >
         保存する
