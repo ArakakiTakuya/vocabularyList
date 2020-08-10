@@ -49,17 +49,20 @@ const Home = () => {
         {lists.length === 0 ? (
           <p>単語帳が作成されていません。</p>
         ) : (
-          lists.map((list) => (
-            <Grid item xs={6} key={list.id}>
-              <Paper className={classes.paper}>
-                <div onClick={() => dispatch(push(`/list/${list.id}`))}>
-                  <h2>{list.listName}</h2>
-                  <p>{list.description}</p>
-                  <p>{list.list.length}個の用語</p>
-                </div>
-              </Paper>
-            </Grid>
-          ))
+          lists.map(
+            (list) =>
+              list.list.length !== 0 && (
+                <Grid item xs={6} key={list.id}>
+                  <Paper className={classes.paper}>
+                    <div onClick={() => dispatch(push(`/list/${list.id}`))}>
+                      <h2>{list.listName}</h2>
+                      <p>{list.description}</p>
+                      <p>{list.list.length}個の用語</p>
+                    </div>
+                  </Paper>
+                </Grid>
+              )
+          )
         )}
       </Grid>
     </div>
