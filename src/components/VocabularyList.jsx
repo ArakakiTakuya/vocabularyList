@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,23 +7,49 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { updateList } from "../reducks/lists/operations";
-
+import TextInput from "../components/UIKit/TextInput";
 import "../styles/vocabulary-list.css";
 
 const VocabularyList = ({ words, listId }) => {
   const dispatch = useDispatch();
+  const [openAddWordDialog, setOpenAddWardDialog] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [targetWord, setTargetWord] = useState({});
+  const [word, setWord] = useState("");
+  const [meaning, setMeaning] = useState("");
 
-  const handleClickOpen = () => {
-    setOpenDialog(true);
+  const handleClickOpen = (type) => {
+    if (type === "add") {
+      setOpenAddWardDialog(true);
+    } else {
+      setOpenDialog(true);
+    }
   };
 
-  const handleClose = () => {
-    setOpenDialog(false);
+  const handleClose = (type) => {
+    if (type === "add") {
+      setOpenAddWardDialog(false);
+    } else {
+      setOpenDialog(false);
+    }
   };
+
+  const inputWord = useCallback(
+    (e) => {
+      setWord(e.target.value);
+    },
+    [setWord]
+  );
+
+  const inputMeaning = useCallback(
+    (e) => {
+      setMeaning(e.target.value);
+    },
+    [setMeaning]
+  );
 
   return (
     <div>
@@ -41,7 +67,7 @@ const VocabularyList = ({ words, listId }) => {
                     "id"
                   );
                   setTargetWord(words[targetIdx]);
-                  handleClickOpen();
+                  handleClickOpen("delete");
                 }}
               >
                 <DeleteIcon />
@@ -50,24 +76,87 @@ const VocabularyList = ({ words, listId }) => {
           </Paper>
         ))}
       </div>
+      <div className="btn">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleClickOpen("add")}
+        >
+          追加
+        </Button>
+      </div>
       <>
-        <Dialog open={openDialog} onClose={handleClose}>
+        <Dialog
+          open={openDialog}
+          onClose={() => {
+            handleClose("delete");
+          }}
+        >
           <DialogContent>
             <DialogContentText>この単語を消去しますか？</DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
-              No
+              いいえ
             </Button>
             <Button
               onClick={() => {
                 const newWordsArr = words.filter((word) => word !== targetWord);
                 dispatch(updateList(listId, newWordsArr));
-                handleClose();
+                handleClose("delete");
               }}
               color="primary"
             >
-              Yes
+              はい
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openAddWordDialog}
+          onClose={() => {
+            handleClose("add");
+          }}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle>新しい単語の追加</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              追加したい単語とその日本語訳を記入してください。
+            </DialogContentText>
+            <TextInput
+              label="単語"
+              fullWidth
+              onChange={inputWord}
+              multiline={false}
+              required={true}
+              rows={1}
+            />
+            <TextInput
+              label="日本語訳"
+              fullWidth
+              onChange={inputMeaning}
+              multiline={false}
+              required={true}
+              rows={1}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                handleClose("add");
+              }}
+              color="primary"
+            >
+              キャンセルする
+            </Button>
+            <Button
+              onClick={() => {
+                console.log("yay");
+                handleClose("add");
+              }}
+              color="primary"
+            >
+              追加する
             </Button>
           </DialogActions>
         </Dialog>
