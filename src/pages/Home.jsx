@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { signOut } from "../reducks/users/operations";
 import { db } from "../firebase/index";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    margin: 20,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Home = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const uid = selector.users.uid;
-  const username = selector.users.username;
-
   const [lists, setLists] = useState([]);
   console.log(lists);
 
@@ -29,16 +42,21 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <p>{uid}</p>
-      <p>{username}</p>
-      <button
-        onClick={() => {
-          dispatch(signOut());
-        }}
-      >
-        サインアウト
-      </button>
+    <div className={classes.root}>
+      <h2>あなたの単語帳</h2>
+      <Grid container spacing={3}>
+        {lists.map((list) => (
+          <Grid item xs={6} key={list.listName}>
+            <Paper className={classes.paper}>
+              <div onClick={() => console.log("hi")}>
+                <h2>{list.listName}</h2>
+                <p>{list.description}</p>
+                <p>{list.list.length}個の用語</p>
+              </div>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
