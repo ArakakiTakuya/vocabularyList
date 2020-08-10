@@ -32,7 +32,7 @@ export const saveList = (listName, description, wordCards, creatorId) => {
   };
 };
 
-export const updateList = (listId, wordCards) => {
+export const updateList = (listId, wordCards, type) => {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now();
 
@@ -46,7 +46,11 @@ export const updateList = (listId, wordCards) => {
       .set(data, { merge: true })
       .then(() => {
         dispatch(push(`/list/${listId}`));
-        alert("選択した単語を消去しました。ページを更新して確認してください。");
+        if (type === "delete") {
+          alert(
+            "選択した単語を消去しました。ページを更新して確認してください。"
+          );
+        }
       })
       .catch((error) => {
         throw new Error(error);

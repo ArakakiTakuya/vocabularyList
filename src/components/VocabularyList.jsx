@@ -102,7 +102,7 @@ const VocabularyList = ({ words, listId }) => {
             <Button
               onClick={() => {
                 const newWordsArr = words.filter((word) => word !== targetWord);
-                dispatch(updateList(listId, newWordsArr));
+                dispatch(updateList(listId, newWordsArr, "delete"));
                 handleClose("delete");
               }}
               color="primary"
@@ -151,7 +151,8 @@ const VocabularyList = ({ words, listId }) => {
             </Button>
             <Button
               onClick={() => {
-                console.log("yay");
+                words.push({ word: word, meaning: meaning });
+                dispatch(updateList(listId, words, "add"));
                 handleClose("add");
               }}
               color="primary"
