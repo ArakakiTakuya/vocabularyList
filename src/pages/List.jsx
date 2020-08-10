@@ -8,7 +8,7 @@ import VocabularyList from "../components/VocabularyList";
 import "../styles/list.css";
 
 const List = () => {
-  const id = window.location.pathname.split("/list/")[1];
+  const listId = window.location.pathname.split("/list/")[1];
   const [list, setList] = useState({});
   console.log("list", list);
 
@@ -21,7 +21,7 @@ const List = () => {
 
   useEffect(() => {
     db.collection("lists")
-      .doc(id)
+      .doc(listId)
       .get()
       .then((snapshot) => {
         const data = snapshot.data();
@@ -39,7 +39,9 @@ const List = () => {
             </Paper>
           ))}
       </Carousel>
-      {JSON.stringify(list) !== "{}" && <VocabularyList words={list.list} />}
+      {JSON.stringify(list) !== "{}" && (
+        <VocabularyList words={list.list} listId={listId} />
+      )}
     </div>
   );
 };

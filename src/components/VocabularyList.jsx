@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -7,11 +8,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import Button from "@material-ui/core/Button";
+import { updateList } from "../reducks/lists/operations";
 
 import "../styles/vocabulary-list.css";
 
-const VocabularyList = ({ words }) => {
+const VocabularyList = ({ words, listId }) => {
+  const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
+  const [targetWord, setTargetWord] = useState({});
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -29,8 +33,17 @@ const VocabularyList = ({ words }) => {
           <Paper variant="outlined" square className="paper" key={i}>
             <h4>{word.word}</h4>
             <h5> {word.meaning}</h5>
-            <div className="delete_btn">
-              <IconButton aria-label="delete" onClick={handleClickOpen}>
+            <div className="delete_btn" id={i}>
+              <IconButton
+                aria-label="delete"
+                onClick={(e) => {
+                  const targetIdx = e.currentTarget.parentNode.getAttribute(
+                    "id"
+                  );
+                  setTargetWord(words[targetIdx]);
+                  handleClickOpen();
+                }}
+              >
                 <DeleteIcon />
               </IconButton>
             </div>
@@ -48,7 +61,9 @@ const VocabularyList = ({ words }) => {
             </Button>
             <Button
               onClick={() => {
-                console.log("wow");
+                const newWordsArr = words.filter((word) => word !== targetWord);
+                dispatch(updateList(listId, newWordsArr));
+                handleClose();
               }}
               color="primary"
             >

@@ -31,3 +31,25 @@ export const saveList = (listName, description, wordCards, creatorId) => {
       });
   };
 };
+
+export const updateList = (listId, wordCards) => {
+  return async (dispatch) => {
+    const timestamp = FirebaseTimestamp.now();
+
+    const data = {
+      list: wordCards,
+      updated_at: timestamp,
+    };
+
+    return listsRef
+      .doc(listId)
+      .set(data, { merge: true })
+      .then(() => {
+        dispatch(push(`/list/${listId}`));
+        alert("選択した単語を消去しました。ページを更新して確認してください。");
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
