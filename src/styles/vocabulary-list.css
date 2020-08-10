@@ -1,0 +1,31 @@
+h2 {
+  margin-left: 25px;
+}
+
+.vocabulary_list > * {
+  display: block;
+  margin: 20px auto;
+}
+
+.vocabulary_list .paper {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+h4 {
+  margin-left: 35px;
+}
+
+h5 {
+  margin: 0 0 0 auto;
+}
+
+.delete_btn {
+  margin: 0 0 0 auto;
+}
+
+.btn {
+  text-align: center;
+  margin: 50px;
+}

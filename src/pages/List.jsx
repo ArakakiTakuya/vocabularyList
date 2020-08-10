@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Paper } from "@material-ui/core";
 
+import VocabularyList from "../components/VocabularyList";
 import "../styles/list.css";
 
 const List = () => {
@@ -38,6 +39,7 @@ const List = () => {
             </Paper>
           ))}
       </Carousel>
+      {JSON.stringify(list) !== "{}" && <VocabularyList words={list.list} />}
     </div>
   );
 };
