@@ -8,7 +8,7 @@ import "../styles/vocabulary-list.css";
 const VocabularyList = ({ words }) => {
   return (
     <div>
-      <h2>収録単語一覧({words.length})</h2>
+      <h2 className="title">収録単語一覧({words.length})</h2>
       <div className="vocabulary_list">
         {words.map((word, i) => (
           <Paper variant="outlined" square className="paper" key={i}>
