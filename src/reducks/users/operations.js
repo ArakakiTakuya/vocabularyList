@@ -43,7 +43,7 @@ export const signUp = (username, email, password, confirmedPassword) => {
       return false;
     }
     if (password.length < 6) {
-      alert("パスワードは6文字以上で入力してください。");
+      alert("パスワードは半角英数字6文字以上で入力してください。");
       return false;
     }
 
@@ -67,7 +67,7 @@ export const signUp = (username, email, password, confirmedPassword) => {
             .doc(uid)
             .set(userInitialData)
             .then(() => {
-              dispatch(push("/"));
+              dispatch(push("/home"));
             });
         }
       })

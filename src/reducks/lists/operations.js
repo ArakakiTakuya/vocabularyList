@@ -5,6 +5,23 @@ const listsRef = db.collection("lists");
 
 export const saveList = (listName, description, wordCards, creatorId) => {
   return async (dispatch) => {
+    // Validations
+    if (listName === "") {
+      alert("単語帳の名前を入力してください。");
+      return false;
+    }
+    if (
+      wordCards[0].word === "" ||
+      wordCards[0].meaning === "" ||
+      wordCards[1].word === "" ||
+      wordCards[1].meaning === "" ||
+      wordCards[2].word === "" ||
+      wordCards[2].meaning === ""
+    ) {
+      alert("最低3単語追加してください。");
+      return false;
+    }
+
     const timestamp = FirebaseTimestamp.now();
 
     const data = {

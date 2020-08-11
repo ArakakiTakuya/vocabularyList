@@ -151,6 +151,10 @@ const VocabularyList = ({ words, listId }) => {
             </Button>
             <Button
               onClick={() => {
+                if (word === "" || meaning === "") {
+                  alert("必須項目が未入力です。");
+                  return;
+                }
                 words.push({ word: word, meaning: meaning });
                 dispatch(updateList(listId, words, "add"));
                 handleClose("add");
