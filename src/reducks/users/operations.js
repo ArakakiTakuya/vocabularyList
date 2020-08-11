@@ -106,6 +106,12 @@ export const signIn = (email, password) => {
               })
             );
             dispatch(push("/home"));
+          })
+          .catch((error) => {
+            alert(
+              "入力されたメールアドレスまたはパスワードが一致しません。入力もう一度お試しください。"
+            );
+            throw new Error(error);
           });
       }
     });
