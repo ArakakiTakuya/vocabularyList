@@ -86,35 +86,37 @@ export const signIn = (email, password) => {
       return false;
     }
 
-    auth.signInWithEmailAndPassword(email, password).then((result) => {
-      const user = result.user;
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        const user = result.user;
 
-      if (user) {
-        const uid = user.uid;
+        if (user) {
+          const uid = user.uid;
 
-        db.collection("users")
-          .doc(uid)
-          .get()
-          .then((snapshot) => {
-            const data = snapshot.data();
+          db.collection("users")
+            .doc(uid)
+            .get()
+            .then((snapshot) => {
+              const data = snapshot.data();
 
-            dispatch(
-              signInAction({
-                isSignIn: true,
-                uid: uid,
-                username: data.username,
-              })
-            );
-            dispatch(push("/home"));
-          })
-          .catch((error) => {
-            alert(
-              "入力されたメールアドレスまたはパスワードが一致しません。入力もう一度お試しください。"
-            );
-            throw new Error(error);
-          });
-      }
-    });
+              dispatch(
+                signInAction({
+                  isSignIn: true,
+                  uid: uid,
+                  username: data.username,
+                })
+              );
+              dispatch(push("/home"));
+            });
+        }
+      })
+      .catch((error) => {
+        alert(
+          "入力されたメールアドレスまたはパスワードが一致しません。もう一度お試しください。"
+        );
+        throw new Error(error);
+      });
   };
 };
 

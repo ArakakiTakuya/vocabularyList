@@ -47,7 +47,7 @@ const Home = () => {
       <h2>あなたの単語帳</h2>
       <Grid container spacing={3}>
         {lists.length === 0 ? (
-          <p>単語帳が作成されていません。</p>
+          <p className="description">単語帳が作成されていません。</p>
         ) : (
           lists.map(
             (list) =>
