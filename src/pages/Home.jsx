@@ -52,7 +52,7 @@ const Home = () => {
           lists.map(
             (list) =>
               list.list.length !== 0 && (
-                <Grid item md={6} sm={12} key={list.id}>
+                <Grid item md={6} xs={12} key={list.id}>
                   <Paper className={classes.paper}>
                     <div onClick={() => dispatch(push(`/list/${list.id}`))}>
                       <h2>{list.listName}</h2>
