@@ -36,7 +36,7 @@ const CreateList = () => {
 
   return (
     <div className="create-list">
-      <h2>新しい単語帳を作る</h2>
+      <h2>新しい単語帳を作成する</h2>
       <TextInput
         fullWidth={true}
         label={"単語帳の名前: "}
@@ -57,22 +57,32 @@ const CreateList = () => {
       {wordcards.map((card, i) => (
         <WordCard wordcard={wordcards[i]} key={i} />
       ))}
-      <IconButton
-        onClick={() => {
-          setWordCard([...wordcards, { word: "", meaning: "" }]);
-        }}
-      >
-        <Icon className="addIcon" color="error" style={{ fontSize: 60 }}>
-          add_circle
-        </Icon>
-      </IconButton>
-      <Button
-        onClick={() => {
-          dispatch(saveList(listName, description, wordcards, uid));
-        }}
-      >
-        保存する
-      </Button>
+      <span className="btn-container">
+        <span className="btn-left">
+          <IconButton
+            onClick={() => {
+              setWordCard([...wordcards, { word: "", meaning: "" }]);
+            }}
+          >
+            <Icon className="addIcon" color="error" style={{ fontSize: 60 }}>
+              add_circle
+            </Icon>
+          </IconButton>
+        </span>
+        <span className="btn-right">
+          <Button
+            style={{
+              background: "#f44336",
+              color: "#fff",
+            }}
+            onClick={() => {
+              dispatch(saveList(listName, description, wordcards, uid));
+            }}
+          >
+            作成する
+          </Button>
+        </span>
+      </span>
     </div>
   );
 };

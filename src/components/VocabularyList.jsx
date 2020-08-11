@@ -11,6 +11,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { updateList } from "../reducks/lists/operations";
 import TextInput from "../components/UIKit/TextInput";
+import Icon from "@material-ui/core/Icon";
 import "../styles/vocabulary-list.css";
 
 const VocabularyList = ({ words, listId }) => {
@@ -77,13 +78,11 @@ const VocabularyList = ({ words, listId }) => {
         ))}
       </div>
       <div className="btn">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => handleClickOpen("add")}
-        >
-          追加
-        </Button>
+        <IconButton onClick={() => handleClickOpen("add")}>
+          <Icon className="addIcon" color="error" style={{ fontSize: 60 }}>
+            add_circle
+          </Icon>
+        </IconButton>
       </div>
       <>
         <Dialog

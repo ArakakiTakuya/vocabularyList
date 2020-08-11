@@ -4,5 +4,11 @@
 
 .card {
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
