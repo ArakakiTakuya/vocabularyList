@@ -5,6 +5,8 @@ import { db } from "../firebase/index";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Icon from "@material-ui/core/Icon";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +67,15 @@ const Home = () => {
           )
         )}
       </Grid>
+      <IconButton
+        onClick={() => {
+          dispatch(push("/create-list"));
+        }}
+      >
+        <Icon className="addIcon" color="error" style={{ fontSize: 60 }}>
+          add_circle
+        </Icon>
+      </IconButton>
     </div>
   );
 };

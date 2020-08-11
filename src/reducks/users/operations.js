@@ -111,11 +111,10 @@ export const signIn = (email, password) => {
             });
         }
       })
-      .catch((error) => {
+      .catch(() => {
         alert(
           "入力されたメールアドレスまたはパスワードが一致しません。もう一度お試しください。"
         );
-        throw new Error(error);
       });
   };
 };
